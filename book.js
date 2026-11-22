@@ -1,4 +1,4 @@
-// Главная Люрассы: фото на первом экране, прейскурант, галерея залов, находки, застолье.
+// Главная страница ресторана ЛЮРАССА: фото на первом экране, прейскурант, галерея залов, находки, застолье.
 (function () {
   "use strict";
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -178,7 +178,7 @@
       var update = function () {
         var n = +range.value;
         nEl.textContent = n; wEl.textContent = word(n); fEl.textContent = fmt(n); draw(n);
-        wa.href = "https://wa.me/79231614002?text=" + encodeURIComponent("Здравствуйте! Хотим застолье в Люрассе, нас " + n + " " + word(n) + ".");
+        wa.href = "https://wa.me/79231614002?text=" + encodeURIComponent("Здравствуйте! Хотим застолье в ресторане ЛЮРАССА, нас " + n + " " + word(n) + ".");
       };
       range.addEventListener("input", update);
       update();
