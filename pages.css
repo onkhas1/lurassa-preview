@@ -677,3 +677,20 @@ button.mitem__pic { padding: 0; border: 0; background: none; cursor: zoom-in; }
   .oven-selection .plate__row { display: grid; grid-template-columns: 1fr auto; gap: 8px 12px; }
   .oven-selection .plate__name { grid-column: 1 / -1; }
 }
+
+/* First visit to the home page. The canvas paints the original emblem. */
+.home-intro { display: none; }
+@media (prefers-reduced-motion: no-preference) {
+  .home-intro.is-playing {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: grid;
+    place-items: center;
+    pointer-events: none;
+    background: #202921;
+    transition: opacity .32s ease-in-out;
+  }
+  .home-intro.is-leaving { opacity: 0; }
+  .home-intro canvas { width: clamp(126px, 24vmin, 202px); height: auto; }
+}
