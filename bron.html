@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Бронь и контакты — Люрасса, Барнаул</title>
+<meta name="description" content="Забронировать стол в ресторане «Люрасса»: Барнаул, Льва Толстого, 31. Ежедневно 11:00–24:00, телефон и WhatsApp +7 923 161-40-02.">
+<meta name="theme-color" content="#f6f1e3">
+<link rel="preload" href="fonts/Prata-400-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="styles.css?v=1795188797">
+<link rel="stylesheet" href="book.css?v=1795188797">
+<link rel="stylesheet" href="pages.css?v=1795188797">
+<link rel="icon" href="img/logo-olive.png">
+</head>
+<body class="bk page-bron">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-bag" viewBox="0 0 24 24"><path d="M5 8h14l-1.2 12.2a1 1 0 0 1-1 .8H7.2a1 1 0 0 1-1-.8L5 8z" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M9 10V6.5a3 3 0 0 1 6 0V10" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M5 5l14 14M19 5L5 19" fill="none" stroke="currentColor" stroke-width="1.8"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="1.8"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></symbol>
+</svg>
+<a class="skip" href="#main">К содержанию</a>
+<header class="bk-top">
+  <div class="wrap bk-top__in">
+    <div class="bk-top__l">
+      <button class="menubtn" type="button" aria-expanded="false" aria-controls="ov"><span class="menubtn__i"><i></i><i></i></span><span class="menubtn__t">Меню</span></button>
+    </div>
+    <a class="bk-logo" href="index.html" aria-label="Люрасса, на главную"><img class="logo-d" src="img/logo-olive.png" alt="" width="30" height="27"><img class="logo-l" src="img/logo-cream.png" alt="" width="30" height="27"><span>ЛЮРАССА</span></a>
+    <div class="bk-top__r">
+      <a class="bk-link bk-hide-s" href="tel:+79231614002">+7 923 161-40-02</a>
+      <a class="btn btn--red btn--sm" href="bron.html">Забронировать</a>
+      <button class="cart-btn" type="button" data-open-cart aria-label="Корзина"><svg aria-hidden="true"><use href="#i-bag"/></svg><span class="cart-btn__n"></span></button>
+    </div>
+  </div>
+</header>
+<div class="ov" id="ov" hidden>
+  <div class="ov__pic" aria-hidden="true"><img src="img/gl-11.webp" alt=""></div>
+  <div class="ov__body">
+    <nav aria-label="Разделы сайта"><ul class="ov__list"><li><a href="index.html" data-img="img/gl-02.webp">Главная</a></li><li><a href="menu.html" data-img="img/dish-ribeye.webp">Меню</a></li><li><a href="zaly.html" data-img="img/gl-08.webp">Залы</a></li><li><a href="istoriya.html" data-img="img/facade-sign.webp">История</a></li><li><a href="konditerskaya.html" data-img="img/dessert-green.webp">Кондитерская</a></li><li><a href="afisha.html" data-img="img/gl-04.webp">Афиша</a></li><li><a href="bron.html" data-img="img/gl-11.webp" aria-current="page">Бронь и контакты</a></li></ul></nav>
+    <div class="ov__foot">
+      <p class="live" data-live>Барнаул, Льва Толстого, 31 · ежедневно 11:00–24:00</p>
+      <p><a href="tel:+79231614002">+7 923 161-40-02</a> · <a href="https://t.me/lurassa_rest">Telegram</a> · <a href="https://vk.com/lurassa_rest">ВКонтакте</a></p>
+    </div>
+  </div>
+</div>
+<main id="main">
+<section class="phead bron-head">
+    <div class="wrap">
+      <h1>Бронь и контакты</h1>
+      <p class="lead">Позвоните или оставьте заявку, администратор перезвонит и подтвердит стол. Чем богаты, тем и рады.</p>
+      <div class="bron-call">
+        <a class="bron-tel" href="tel:+79231614002">+7 923 161-40-02</a>
+        <a class="btn btn--ink" href="https://wa.me/79231614002">Написать в WhatsApp</a>
+      </div>
+    </div>
+  </section>
+  <section class="bron">
+    <div class="wrap bron__grid">
+      <form class="form" data-book>
+        <h2 class="form__h">Стол на вечер</h2>
+        <div class="form__fields">
+          <div class="row2">
+            <div class="field"><label for="b-date">Дата</label><input id="b-date" name="date" type="date" required></div>
+            <div class="field"><label for="b-time">Время</label><input id="b-time" name="time" type="time" min="11:00" max="23:00" value="19:00" required></div>
+          </div>
+          <div class="row2">
+            <div class="field"><label for="b-guests">Гостей</label><select id="b-guests" name="guests"><option>1</option><option selected>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7–10</option><option>Больше 10</option></select></div>
+            <div class="field"><label for="b-name">Имя</label><input id="b-name" name="name" autocomplete="given-name" required></div>
+          </div>
+          <div class="field"><label for="b-phone">Телефон</label><input id="b-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+7 900 000-00-00" required></div>
+          <button class="btn btn--red" type="submit">Отправить заявку</button>
+          <p class="form__note">Администратор перезвонит и подтвердит бронь.</p>
+        </div>
+        <div class="form__ok" tabindex="-1"><b>Заявка принята.</b> Администратор перезвонит и подтвердит бронь. <i>(Прототип: заявка никуда не отправляется.)</i></div>
+      </form>
+      <div class="bron__info">
+        <dl>
+          <div><dt>Адрес</dt><dd><a href="https://2gis.ru/barnaul/search/Льва%20Толстого%2031">Барнаул, Льва Толстого, 31</a></dd></div>
+          <div><dt>Ресторан</dt><dd>Ежедневно 11:00–24:00</dd></div>
+          <div><dt>Кондитерская</dt><dd>Ежедневно 08:00–22:00</dd></div>
+          <div><dt>Мы в сети</dt><dd><a href="https://t.me/lurassa_rest">Telegram</a> · <a href="https://vk.com/lurassa_rest">ВКонтакте</a></dd></div>
+        </dl>
+        <p class="live" data-live>Барнаул · ежедневно 11:00–24:00</p>
+      </div>
+    </div>
+  </section>
+<nav class="pager" aria-label="Соседние разделы">
+  <div class="wrap pager__in">
+    <a class="pager__a pager__prev" href="afisha.html"><svg aria-hidden="true"><use href="#i-arrow"/></svg><span><small>Назад</small>Афиша</span></a>
+    
+    <a class="pager__a pager__next" href="index.html"><span><small>Дальше</small>Главная</span><svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+  </div>
+</nav>
+</main>
+<footer class="foot">
+  <div class="wrap foot__in">
+    <img src="img/logo-cream.png" alt="Люрасса" width="56" height="50">
+    <nav class="foot__nav" aria-label="Разделы"><a href="menu.html">Меню</a><a href="zaly.html">Залы</a><a href="istoriya.html">История</a><a href="konditerskaya.html">Кондитерская</a><a href="afisha.html">Афиша</a><a href="bron.html">Бронь и контакты</a></nav>
+    <p>Ресторан купеческой кухни «Люрасса». Барнаул, Льва Толстого, 31. Ежедневно 11:00–24:00. <a href="tel:+79231614002">+7 923 161-40-02</a></p>
+    <p>Цены на сайте справочные и не являются публичной офертой.</p>
+  </div>
+</footer>
+<div class="cartbar" role="region" aria-label="Корзина">
+  <div class="cartbar__sum"></div>
+  <button class="btn" type="button" data-open-cart>Корзина</button>
+</div>
+
+<div class="drawer" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="cart-title">
+  <div class="drawer__bg"></div>
+  <div class="drawer__panel">
+    <div class="drawer__head"><h2 id="cart-title">Ваш заказ</h2><button class="x" type="button" data-close-cart aria-label="Закрыть корзину"><svg aria-hidden="true"><use href="#i-x"/></svg></button></div>
+    <div class="drawer__body"></div>
+    <div class="drawer__foot">
+      <div class="ways">
+        <label><input type="radio" name="way" value="pickup" checked>Самовывоз<small>Льва Толстого, 31</small></label>
+        <label><input type="radio" name="way" value="delivery" disabled>Доставка<small>скоро</small></label>
+      </div>
+      <div class="total"><span>Итого</span><span></span></div>
+      <button class="btn to-checkout" type="button">Оформить</button>
+      <form class="checkout">
+        <div class="field"><label for="c-name">Имя</label><input id="c-name" name="name" autocomplete="given-name" required></div>
+        <div class="field"><label for="c-phone">Телефон</label><input id="c-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+7 900 000-00-00" required></div>
+        <div class="field"><label for="c-time">Заберу к</label><input id="c-time" name="pickup_time" type="time" value="19:00" required></div>
+        <button class="btn" type="submit">Отправить заказ</button>
+      </form>
+      <p class="checkout-ok" hidden><b>Заказ принят.</b> Позвоним, когда будет готов. <i>(Прототип: заказ никуда не отправляется.)</i></p>
+    </div>
+  </div>
+</div>
+
+<script src="menu-data.js?v=1795188797"></script>
+<script src="app.js?v=1795188797"></script>
+<script src="site.js?v=1795188797"></script>
+<script src="dish.js?v=1795188797"></script>
+</body>
+</html>
