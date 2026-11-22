@@ -1,9 +1,6 @@
-// Общее для всех страниц: полноэкранное меню, живой статус по барнаульскому времени,
-// первый экран по времени суток, проявление текста по словам.
+// Общее для всех страниц: навигация и статус по барнаульскому времени.
 (function () {
   "use strict";
-  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var top = document.querySelector(".bk-top");
 
   // ---------- full-screen menu ----------
   var btn = document.querySelector(".menubtn"), ov = document.getElementById("ov");
@@ -29,13 +26,6 @@
       });
       a.addEventListener("click", function () { set(false); });
     });
-  }
-
-  // ---------- header over the home hero ----------
-  if (top && top.classList.contains("bk-top--over")) {
-    var hero = document.querySelector(".h3");
-    var onS = function () { top.classList.toggle("is-scrolled", !hero || hero.getBoundingClientRect().bottom < 80); };
-    window.addEventListener("scroll", onS, { passive: true }); onS();
   }
 
   // ---------- Barnaul clock ----------
@@ -67,88 +57,6 @@
   }
   function paintLive() { document.querySelectorAll("[data-live]").forEach(function (el) { el.innerHTML = status(); }); }
   if (document.querySelector("[data-live]")) { paintLive(); setInterval(paintLive, 30000); }
-
-  // ---------- hero mood by time of day ----------
-  var h3 = document.querySelector(".h3");
-  if (h3) {
-    var MOODS = {
-      morning: { t: "Завтрак в кондитерской", sub: "Кондитерская открывается в 08:00. Круассан, кофе и никакой спешки, чем не купеческое утро.",
-        cta: [["konditerskaya.html#korobka", "Собрать коробку конфет", "light"], ["konditerskaya.html#hleb", "Хлеб к утру", "line"]] },
-      day: { t: "Обеденный час", sub: "Обедаем по‑купечески, не торопясь. Хлеб пекут здесь же, а пельмени лепят руками. Открыто с 11:00.",
-        cta: [["bron.html", "Забронировать стол", "light"], ["menu.html", "Меню", "line"]] },
-      evening: { t: "Ужин у камина", sub: "Тёплый зал, огонь в камине и неспешный разговор. Двери открыты до полуночи.",
-        cta: [["bron.html", "Забронировать стол", "light"], ["afisha.html", "Афиша вечера", "line"]] }
-    };
-    var hour = barnaulNow().h;
-    var mood = hour >= 6 && hour < 11 ? "morning" : hour >= 11 && hour < 17 ? "day" : "evening";
-    var title = h3.querySelector("[data-mood-text]"), subEl = h3.querySelector("[data-mood-sub]"), ctaEl = h3.querySelector("[data-mood-cta]");
-    var timer = 0;
-    var apply = function (m) {
-      mood = m; h3.setAttribute("data-mood", m);
-      [title, subEl, ctaEl].forEach(function (el) { if (el) el.style.opacity = 0; });
-      setTimeout(function () {
-        var M = MOODS[m];
-        title.textContent = M.t;
-        if (subEl) subEl.textContent = M.sub;
-        if (ctaEl) ctaEl.innerHTML = M.cta.map(function (c) { return '<a class="btn btn--' + c[2] + '" href="' + c[0] + '">' + c[1] + "</a>"; }).join("");
-        [title, subEl, ctaEl].forEach(function (el) { if (el) el.style.opacity = 1; });
-      }, reduce ? 0 : 300);
-      document.querySelectorAll(".moods button").forEach(function (b) { b.setAttribute("aria-pressed", String(b.getAttribute("data-m") === m)); });
-      var imgs = [].slice.call(h3.querySelectorAll('.h3__set[data-for="' + m + '"] img'));
-      h3.querySelectorAll(".h3__set img").forEach(function (i) { i.classList.remove("is-on"); });
-      if (imgs[0]) { void imgs[0].offsetWidth; imgs[0].classList.add("is-on"); }
-      clearInterval(timer);
-      if (!reduce && imgs.length > 1) {
-        var cur = 0;
-        timer = setInterval(function () {
-          if (document.hidden) return;
-          var next = (cur + 1) % imgs.length, prev = imgs[cur];
-          imgs[next].classList.remove("is-on"); void imgs[next].offsetWidth; imgs[next].classList.add("is-on");
-          setTimeout(function () { prev.classList.remove("is-on"); }, 1800);
-          cur = next;
-        }, 6500);
-      }
-    };
-    var bar = h3.querySelector(".moods");
-    if (bar) bar.addEventListener("click", function (e) { var b = e.target.closest("button"); if (b) apply(b.getAttribute("data-m")); });
-    apply(mood);
-
-    // the big word drifts up a little as you scroll away
-    var word = h3.querySelector(".h3__word");
-    if (word && !reduce) {
-      var t = false;
-      window.addEventListener("scroll", function () {
-        if (t) return; t = true;
-        requestAnimationFrame(function () { t = false; var y = Math.min(window.scrollY, window.innerHeight); word.style.transform = "translateY(" + (-y * 0.25) + "px)"; });
-      }, { passive: true });
-    }
-  }
-
-  // ---------- statement: words light up as you read ----------
-  var say = document.querySelector("[data-words]");
-  if (say) {
-    say.innerHTML = say.textContent.trim().split(/\s+/).map(function (w) { return '<span class="w">' + w + "</span>"; }).join(" ");
-    var ws = [].slice.call(say.querySelectorAll(".w"));
-    if (reduce) ws.forEach(function (w) { w.classList.add("on"); });
-    else {
-      var paint = function () {
-        var r = say.getBoundingClientRect(), vh = window.innerHeight;
-        var p = (vh * 0.92 - r.top) / (r.height + vh * 0.2);
-        var k = Math.round(Math.max(0, Math.min(1, p)) * ws.length);
-        ws.forEach(function (w, i) { w.classList.toggle("on", i < k); });
-      };
-      window.addEventListener("scroll", paint, { passive: true }); paint();
-    }
-  }
-  // ---------- scenes: show their text once they settle ----------
-  var scenes = document.querySelectorAll(".scene");
-  if (scenes.length) {
-    if (reduce || !("IntersectionObserver" in window)) scenes.forEach(function (sc) { sc.classList.add("is-in"); });
-    else {
-      var sio = new IntersectionObserver(function (ents) { ents.forEach(function (en) { en.target.classList.toggle("is-in", en.intersectionRatio > 0.55); }); }, { threshold: [0, .55, 1] });
-      scenes.forEach(function (sc) { sio.observe(sc); });
-    }
-  }
 })();
 
 // Залы: колонки коллажа едут с разной скоростью, фото открывается на весь экран.
@@ -191,6 +99,12 @@
   "use strict";
   var tl = document.querySelector(".tl");
   if (!tl) return;
+  const collection = tl.closest("details");
+  function openLinkedCollection() {
+    if (location.hash === "#nahodki") collection.open = true;
+  }
+  openLinkedCollection();
+  window.addEventListener("hashchange", openLinkedCollection);
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var fill = tl.querySelector(".tl__fill"), items = [].slice.call(tl.querySelectorAll(".tl__i"));
   if (reduce) { items.forEach(function (i) { i.classList.add("on"); }); fill.style.height = "100%"; return; }
@@ -203,6 +117,24 @@
     items.forEach(function (i) { i.classList.toggle("on", i.getBoundingClientRect().top + 14 < mark); });
   };
   window.addEventListener("scroll", function () { if (!t) { t = true; requestAnimationFrame(paint); } }, { passive: true });
+  collection.addEventListener("toggle", paint);
   window.addEventListener("resize", paint);
   paint();
+})();
+
+(function () {
+  const album = document.querySelector(".archive-album");
+  if (!album) return;
+  const controls = album.querySelector(".album-controls");
+  const buttons = controls.querySelectorAll("button");
+  function show(selected) {
+    for (const button of buttons) {
+      const active = button === selected;
+      document.getElementById(button.getAttribute("aria-controls")).hidden = !active;
+      button.setAttribute("aria-pressed", String(active));
+    }
+  }
+  for (const button of buttons) button.addEventListener("click", () => show(button));
+  show(buttons[0]);
+  controls.hidden = false;
 })();
