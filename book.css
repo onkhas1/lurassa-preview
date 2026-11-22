@@ -27,8 +27,7 @@ body.bk { background: var(--paper); color: var(--ink); }
 .bk-link { font-size: 15px; font-weight: 500; text-decoration: none; padding: 6px 0; border-top: 1px solid currentColor; border-bottom: 1px solid currentColor; border-color: color-mix(in srgb, currentColor 45%, transparent); white-space: nowrap; }
 .bk-link:hover { border-color: currentColor; }
 .bk-logo { display: grid; justify-items: center; gap: 2px; text-decoration: none; }
-.bk-logo img { width: 30px; height: auto; }
-.bk-logo span { font-family: var(--display); font-size: 19px; letter-spacing: .22em; padding-left: .22em; }
+.bk-logo img { display: block; width: auto; height: 64px; }
 .bk-top .cart-btn { color: currentColor; border-color: color-mix(in srgb, currentColor 40%, transparent); }
 .bk-top .logo-l { display: none; } .bk-top .logo-d { display: block; }
 .bk-top.is-over .logo-l { display: block; } .bk-top.is-over .logo-d { display: none; }

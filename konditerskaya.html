@@ -4,13 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Кондитерская лавка — Люрасса, Барнаул</title>
-<meta name="description" content="Кондитерская «Люрасса»: соберите коробку конфет ручной работы и закажите ремесленный хлеб к утру. Ежедневно 08:00–22:00.">
+<meta name="description" content="Кондитерская «Люрасса» в Барнауле: завтраки, торты на заказ, конфеты ручной работы и хлеб к утру.">
 <meta name="theme-color" content="#f6f1e3">
 <link rel="preload" href="fonts/Prata-400-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="styles.css?v=1795331406">
-<link rel="stylesheet" href="book.css?v=1795331406">
-<link rel="stylesheet" href="pages.css?v=1795331406">
-<link rel="icon" href="img/logo-olive.png">
+<link rel="stylesheet" href="styles.css?v=1795354217">
+<link rel="stylesheet" href="book.css?v=1795354217">
+<link rel="stylesheet" href="pages.css?v=1795354217">
+<link rel="icon" href="img/logo-tree-gold.png">
 </head>
 <body class="bk page-konditerskaya">
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -47,7 +47,7 @@
 <section class="phead">
     <div class="wrap">
       <h1>Кондитерская лавка</h1>
-      <p class="lead">Сладкая лавка дома купца Сухова открыта с 08:00 до 22:00. Завтраки, круассаны и кофе, торты на заказ с вашей начинкой и надписью, конфеты ручной работы.</p>
+      <p class="lead">Кондитерская открыта ежедневно с 08:00 до 22:00. Здесь готовят завтраки, пекут круассаны, делают конфеты и принимают заказы на торты с выбранной начинкой и надписью.</p>
     </div>
   </section>
 
@@ -55,7 +55,7 @@
     <div class="wrap">
       <div class="candy__card">
         <h2 class="candy__h">Соберите коробку конфет</h2>
-        <p class="candy__lead">Выберите вкус, чтобы добавить конфету в свободную ячейку. Нажмите на конфету в коробке, чтобы убрать её.</p>
+        <p class="candy__lead">Выберите девять конфет для коробки. Чтобы убрать конфету, нажмите на неё.</p>
         <div class="candy__grid">
           <div class="cbox" aria-label="Ваша коробка">
             <div class="cbox__lid"><img src="img/logo-tree-gold.png" alt="" width="30" height="30"><span>Люрасса · Кондитерская лавка</span></div>
@@ -69,7 +69,7 @@
               <button class="btn btn--ink" type="button" id="box-fill">Собрать за меня</button>
               <button class="linkbtn" type="button" id="box-clear">Очистить</button>
             </div>
-            <p class="cbox__note">Соберём к самовывозу. Стоимость зависит от выбранных конфет.</p>
+            <p class="cbox__note">Цена зависит от выбранных конфет. Заказ в этой версии сайта пока не отправляется.</p>
           </div>
         </div>
       </div>
@@ -83,7 +83,7 @@
       <div class="bread__grid">
         <div class="bread__pic rv"><img src="img/bread.webp" alt="Ремесленный хлеб на полках" loading="lazy" width="933" height="1400"></div>
         <div>
-          <p class="ch__lead">Печём семь видов хлеба, от бородинского до кукурузного. Закажите с вечера и выберите время самовывоза начиная с 08:00.</p>
+          <p class="ch__lead">Каждый день здесь пекут семь видов хлеба. Выберите буханки и время самовывоза с 08:00.</p>
           <ul class="carte__list" id="bread-list"></ul>
         </div>
       </div>
@@ -106,9 +106,14 @@
 </main>
 <footer class="foot">
   <div class="wrap foot__in">
-    <img src="img/logo-cream.png" alt="Люрасса" width="56" height="50">
+    <img class="foot__wordmark" src="img/wordmark-cream.png" alt="Люрасса" width="392" height="332">
     <nav class="foot__nav" aria-label="Разделы"><a href="menu.html">Кухня и меню</a><a href="zaly.html">Залы</a><a href="konditerskaya.html">Кондитерская</a><a href="afisha.html">Афиша</a><a href="bron.html">Бронь и контакты</a></nav>
-    <p>Ресторан купеческой кухни «Люрасса». Барнаул, Льва Толстого, 31. Ежедневно 11:00–24:00. <a href="tel:+79231614002">+7 923 161-40-02</a></p>
+    <address class="foot__place">
+      <svg class="foot__pin" viewBox="0 0 32 40" aria-hidden="true"><path d="M16 38S2 23.3 2 15.5a14 14 0 1 1 28 0C30 23.3 16 38 16 38Z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="16" cy="15" r="4.5" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+      <span class="foot__place-copy"><b>Ресторан «Люрасса»</b><span>Барнаул, Льва Толстого, 31</span><span>Ежедневно 11:00–24:00</span></span>
+      <a class="foot__map-link" href="https://2gis.ru/barnaul/firm/70000001102581486" target="_blank" rel="noopener noreferrer">Открыть в 2ГИС</a>
+    </address>
+    <p><a href="tel:+79231614002">+7 923 161-40-02</a></p>
     <p>Цены на сайте справочные и не являются публичной офертой.</p>
   </div>
 </footer>
@@ -125,26 +130,26 @@
     <div class="drawer__foot">
       <div class="ways">
         <label><input type="radio" name="way" value="pickup" checked>Самовывоз<small>Льва Толстого, 31</small></label>
-        <label><input type="radio" name="way" value="delivery" disabled>Доставка<small>скоро</small></label>
+        <label><input type="radio" name="way" value="delivery" disabled>Доставка<small>Пока недоступна</small></label>
       </div>
       <div class="total"><span>Итого</span><span></span></div>
       <button class="btn to-checkout" type="button">Оформить</button>
       <form class="checkout">
         <div class="field"><label for="c-name">Имя</label><input id="c-name" name="name" autocomplete="given-name" required></div>
         <div class="field"><label for="c-phone">Телефон</label><input id="c-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+7 900 000-00-00" required></div>
-        <div class="field"><label for="c-time">Заберу к</label><input id="c-time" name="pickup_time" type="time" value="19:00" required></div>
+        <div class="field"><label for="c-time">Время самовывоза</label><input id="c-time" name="pickup_time" type="time" value="19:00" required></div>
         <button class="btn" type="submit">Отправить заказ</button>
       </form>
-      <p class="checkout-ok" hidden><b>Заказ принят.</b> Позвоним, когда будет готов. <i>(Прототип: заказ никуда не отправляется.)</i></p>
+      <p class="checkout-ok" hidden><b>Демо-версия заказа.</b> Заказ никуда не отправлен. Чтобы оформить самовывоз, позвоните по номеру <a href="tel:+79231614002">+7 923 161-40-02</a>.</p>
     </div>
   </div>
 </div>
 
-<script src="menu-data.js?v=1795331406"></script>
-<script src="book.js?v=1795331406"></script>
-<script src="app.js?v=1795331406"></script>
-<script src="site.js?v=1795331406"></script>
-<script src="dish.js?v=1795331406"></script>
-<script src="konditer.js?v=1795331406"></script>
+<script src="menu-data.js?v=1795354217"></script>
+<script src="book.js?v=1795354217"></script>
+<script src="app.js?v=1795354217"></script>
+<script src="site.js?v=1795354217"></script>
+<script src="dish.js?v=1795354217"></script>
+<script src="konditer.js?v=1795354217"></script>
 </body>
 </html>

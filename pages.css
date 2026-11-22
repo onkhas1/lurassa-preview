@@ -28,7 +28,6 @@
 .mnav-open { overflow: hidden; }
 @media (min-width: 640px) { .bk-top .btn--sm { display: inline-flex; } }
 @media (min-width: 1180px) { .bk-nav { display: flex; } .burger { display: none; } }
-@media (max-width: 420px) { .bk-logo span { font-size: 16px; letter-spacing: .16em; } }
 
 /* inner page head */
 .phead { padding: clamp(120px, 14vw, 180px) 0 clamp(40px, 5vw, 70px); }
@@ -388,7 +387,7 @@
   .scene__hold { height: 0; }
   .scene:hover .scene__pic img { transform: none; }
 }
-.bk-logo img { display: block; width: auto; height: 64px; }
+.foot .foot__wordmark { width: 76px; height: auto; }
 .kitchen-opening {
   position: relative;
   display: grid;
