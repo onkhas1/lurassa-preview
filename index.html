@@ -22,16 +22,16 @@
 <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Restaurant", "@id": "https://lurassa.ru/#business", "name": "ЛЮРАССА", "telephone": "+79231614002", "address": {"@type": "PostalAddress", "addressCountry": "RU", "addressLocality": "Барнаул", "streetAddress": "ул. Льва Толстого, 31"}, "url": "https://lurassa.ru/", "openingHoursSpecification": {"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], "opens": "11:00", "closes": "00:00"}, "servesCuisine": "Русская кухня", "priceRange": "[ЗАПОЛНИТЬ: ценовой диапазон]", "geo": {"@type": "GeoCoordinates", "latitude": 53.329795, "longitude": 83.79181}, "sameAs": ["https://t.me/lurassa_rest", "https://vk.com/lurassa_rest", "https://2gis.ru/barnaul/firm/70000001102581486"]}]}</script>
 <meta name="theme-color" content="#f6f1e3">
 <link rel="preload" href="fonts/Prata-400-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="styles.css?v=1795427676">
-<link rel="stylesheet" href="book.css?v=1795427676">
-<link rel="stylesheet" href="pages.css?v=1795427676">
+<link rel="stylesheet" href="styles.css?v=1795428284">
+<link rel="stylesheet" href="book.css?v=1795428284">
+<link rel="stylesheet" href="pages.css?v=1795428284">
 <link rel="icon" href="img/logo-tree-gold.png">
 <!-- Restoplace start -->
 <!-- Restoplace end -->
 </head>
 <body class="bk page-index">
 <div class="home-intro" aria-hidden="true">
-  <video muted playsinline preload="none" width="320" height="320"></video>
+  <img alt="" width="192" height="192">
 </div>
 <script>
   (() => {
@@ -54,23 +54,24 @@
     } catch {}
 
     const intro = document.querySelector(".home-intro");
-    const video = intro.querySelector("video");
-    let timeout = setTimeout(() => intro.remove(), 6500);
+    const artwork = intro.querySelector("img");
+    const timeout = setTimeout(() => intro.remove(), 2200);
 
-    function dismiss() {
+    artwork.addEventListener("load", () => {
       clearTimeout(timeout);
-      intro.classList.add("is-leaving");
-      setTimeout(() => intro.remove(), 320);
-    }
-
-    video.addEventListener("playing", () => {
+      if (!intro.isConnected) return;
       intro.classList.add("is-playing");
       try { sessionStorage.setItem(sessionKey, "1"); } catch {}
+      setTimeout(() => {
+        intro.classList.add("is-leaving");
+        setTimeout(() => intro.remove(), 320);
+      }, 2600);
     }, { once: true });
-    video.addEventListener("ended", dismiss, { once: true });
-    video.addEventListener("error", dismiss, { once: true });
-    video.src = "img/home-intro.webm?v=3";
-    video.play().catch(dismiss);
+    artwork.addEventListener("error", () => {
+      clearTimeout(timeout);
+      intro.remove();
+    }, { once: true });
+    artwork.src = "img/home-intro-alpha.webp";
   })();
 </script>
 
@@ -267,10 +268,10 @@
   </div>
 </div>
 
-<script src="menu-data.js?v=1795427676"></script>
-<script src="book.js?v=1795427676"></script>
-<script src="app.js?v=1795427676"></script>
-<script src="site.js?v=1795427676"></script>
-<script src="dish.js?v=1795427676"></script>
+<script src="menu-data.js?v=1795428284"></script>
+<script src="book.js?v=1795428284"></script>
+<script src="app.js?v=1795428284"></script>
+<script src="site.js?v=1795428284"></script>
+<script src="dish.js?v=1795428284"></script>
 </body>
 </html>

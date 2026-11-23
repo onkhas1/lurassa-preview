@@ -243,31 +243,24 @@
 
 (function () {
   const view = document.querySelector('[data-widget-url]');
-  if (!view || !('IntersectionObserver' in window)) return;
+  if (!view) return;
   let url;
   try { url = new URL(view.dataset.widgetUrl); } catch { return; }
   if (url.origin !== 'https://platform.2gis.ru' || url.pathname !== '/api/map-constructor/widget') return;
 
   let accepted = false;
   try { accepted = localStorage.getItem('lurassa.cookie-notice.v1') === 'accepted'; } catch { /* Use the in-page choice. */ }
-  let visible = false;
-  const observer = new IntersectionObserver(entries => {
-    visible = entries[entries.length - 1].isIntersecting;
-    loadWhenReady();
-  });
-  observer.observe(view);
   document.addEventListener('lurassa:cookies-accepted', () => {
     accepted = true;
     loadWhenReady();
   }, { once: true });
+  loadWhenReady();
 
   function loadWhenReady() {
-    if (!accepted || !visible || view.querySelector('iframe')) return;
-    observer.disconnect();
+    if (!accepted || view.querySelector('iframe')) return;
     const frame = document.createElement('iframe');
     const toggle = view.querySelector('button');
     frame.title = 'Ресторан ЛЮРАССА на карте 2ГИС';
-    frame.loading = 'lazy';
     frame.tabIndex = -1;
     frame.src = url.href;
     frame.addEventListener('load', () => {
