@@ -157,13 +157,13 @@ p { margin: 0; max-width: 62ch; text-wrap: pretty; }
 .add:active { transform: scale(.94); }
 .qty { display: inline-flex; align-items: center; border: 1px solid var(--olive); border-radius: 20px; height: 40px; }
 .qty button { width: 36px; height: 38px; border: 0; background: transparent; cursor: pointer; font-size: 18px; line-height: 1; color: var(--olive); border-radius: 20px; }
-.qty button:hover { background: var(--sage); }
+@media (hover: hover) and (pointer: fine) {
+  .qty button:hover { background: var(--sage); }
+}
+.qty button:active { background: var(--sage); }
+.qty button:focus:not(:focus-visible) { outline: none; }
 .qty span { min-width: 22px; text-align: center; font-weight: 700; font-variant-numeric: tabular-nums; }
 
-.stamp { position: absolute; z-index: 3; pointer-events: none; font-size: 13px; font-weight: 600; color: var(--on-olive); background: var(--olive); padding: 6px 12px; border-radius: 2px; opacity: 0; transform: translateY(6px); animation: pop .5s var(--ease) forwards; }
-@keyframes pop { to { opacity: 1; transform: translateY(0); } }
-.stamp.out { animation: fadeout .4s ease forwards; }
-@keyframes fadeout { from { opacity: 1; transform: none; } to { opacity: 0; transform: none; } }
 
 /* ---------- rooms ---------- */
 .rooms { display: grid; gap: 28px 16px; grid-template-columns: 1fr 1fr; }
@@ -311,7 +311,6 @@ p { margin: 0; max-width: 62ch; text-wrap: pretty; }
 .mitem__name { font-weight: 500; font-size: 16px; line-height: 1.4; }
 .mitem__w { font-size: 13px; color: var(--ink-2); margin-top: 2px; }
 .mitem__act { display: flex; align-items: center; gap: 14px; }
-.mitem .stamp { right: 0; top: -6px; }
 @media (min-width: 960px) { .mitems { grid-template-columns: 1fr 1fr; column-gap: 56px; } .mitem__name { font-size: 17px; } }
 .barnote { margin-top: 56px; padding: 28px 24px; background: var(--sage); border-radius: 2px; }
 .barnote h2 { font-size: clamp(22px, 3vw, 28px); margin-bottom: 8px; }

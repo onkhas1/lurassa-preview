@@ -53,7 +53,6 @@
     addCustom: function (key, info) {
       byId[key] = { id: key, name: info.name, w: info.w || "", price: info.price, custom: true };
       setQty(key, (cart[key] || 0) + 1);
-      toast("Добавлено в заказ", esc(info.name));
     },
     open: function () { openDrawer(); },
     get: function (id) { return byId[id]; },
@@ -93,6 +92,8 @@
   function renderDrawer() {
     if (!drawer) return;
     var body = drawer.querySelector(".drawer__body");
+    var focused = document.activeElement;
+    var keyboardButton = body.contains(focused) && focused.matches(".qty button:focus-visible") ? focused : null;
     var ids = Object.keys(cart);
     if (!ids.length) {
       body.innerHTML = '<div class="empty"><b>Корзина пуста</b>Добавьте блюда из меню, и они появятся здесь.</div>';
@@ -104,34 +105,16 @@
           '<div class="price">' + rub(d.price * cart[id]) + "</div>" + qtyHtml(id, cart[id]) + "</div>";
       }).join("");
     }
+    if (keyboardButton) {
+      var attribute = keyboardButton.hasAttribute("data-inc") ? "data-inc" : "data-dec";
+      var key = keyboardButton.getAttribute(attribute);
+      var replacement = Array.from(body.querySelectorAll("[" + attribute + "]")).find(function (button) {
+        return button.getAttribute(attribute) === key;
+      });
+      (replacement || body.querySelector(".qty button") || drawer.querySelector(".x")).focus();
+    }
     drawer.querySelector(".total span:last-child").textContent = rub(sum());
     drawer.querySelectorAll(".to-checkout, .checkout button[type=submit]").forEach(function (b) { b.disabled = !ids.length; });
-  }
-
-  // ---------- feedback ----------
-  function stamp(btn) {
-    var host = btn.closest(".plate, .mitem, .carte__list li");
-    if (!host) return;
-    var s = document.createElement("span");
-    s.className = "stamp"; s.textContent = "В заказе";
-    if (host.classList.contains("plate")) { s.style.left = "14px"; s.style.top = "14px"; }
-    host.style.position = host.style.position || "relative";
-    host.appendChild(s);
-    setTimeout(function () { s.classList.add("out"); }, 1100);
-    setTimeout(function () { s.remove(); }, 1600);
-  }
-
-  var toastEl = null, toastT = 0;
-  function toast(title, html) {
-    if (!toastEl) {
-      toastEl = document.createElement("div");
-      toastEl.className = "toast"; toastEl.setAttribute("role", "status"); toastEl.setAttribute("aria-live", "polite");
-      document.body.appendChild(toastEl);
-    }
-    toastEl.innerHTML = "<b>" + title + "</b><p>" + html + "</p>";
-    toastEl.classList.add("is-on");
-    clearTimeout(toastT);
-    toastT = setTimeout(function () { toastEl.classList.remove("is-on"); }, 6500);
   }
 
   // ---------- doneness picker ----------
@@ -156,8 +139,7 @@
         var d = DONENESS[+o.getAttribute("data-d")], key = id + "~" + d[0];
         byId[key] = { id: key, name: base.name + " · " + d[1], w: base.w, price: base.price, custom: true };
         setQty(key, (cart[key] || 0) + 1);
-        closePick(); stamp(btn);
-        toast("Добавлено в заказ", esc(base.name) + ", прожарка " + d[1].toLowerCase() + ".");
+        closePick();
       });
     });
     picker.hidden = false; picker._opener = btn;
@@ -172,7 +154,7 @@
     var id;
     if ((id = t.getAttribute("data-add")) && (t.classList.contains("add") || t.classList.contains("add-wide"))) {
       if (STEAKS[id]) { pickDoneness(id, t); return; }
-      stamp(t); setQty(id, (cart[id] || 0) + 1);
+      setQty(id, (cart[id] || 0) + 1);
     } else if ((id = t.getAttribute("data-inc"))) { setQty(id, (cart[id] || 0) + 1); }
     else if ((id = t.getAttribute("data-dec"))) { setQty(id, (cart[id] || 0) - 1); }
     else if (t.hasAttribute("data-open-cart")) { e.preventDefault(); openDrawer(); }
