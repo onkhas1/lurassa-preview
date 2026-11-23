@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>ЛЮРАССА — ресторан купеческой кухни в Барнауле</title>
-<meta name="description" content="История дома купца Сухова в Барнауле. После реставрации в бывшем купеческом магазине по адресу Льва Толстого, 31, открылся ресторан русской кухни ЛЮРАССА.">
+<meta name="description" content="Ресторан русской кухни ЛЮРАССА в Барнауле на улице Льва Толстого, 31. Меню, бронирование столов и часы работы.">
 <meta name="theme-color" content="#f6f1e3">
 <link rel="preload" href="fonts/Prata-400-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="styles.css?v=1795358185">
-<link rel="stylesheet" href="book.css?v=1795358185">
-<link rel="stylesheet" href="pages.css?v=1795358185">
+<link rel="stylesheet" href="styles.css?v=1795409646">
+<link rel="stylesheet" href="book.css?v=1795409646">
+<link rel="stylesheet" href="pages.css?v=1795409646">
 <link rel="icon" href="img/logo-tree-gold.png">
 </head>
 <body class="bk page-index">
@@ -18,6 +18,16 @@
 </div>
 <script>
   (() => {
+    const oldSections = new Map([
+      ["#story", "#story"], ["#sukhov", "#sukhov"], ["#store", "#store"],
+      ["#cinema", "#store"], ["#finds", "#finds"], ["#nahodki", "#nahodki"],
+      ["#restoration", "#restoration"], ["#opening", "#opening"], ["#mission", "#restoration"]
+    ]);
+    const historySection = oldSections.get(location.hash);
+    if (historySection) {
+      location.replace("istoriya.html" + historySection);
+      return;
+    }
     const motion = matchMedia("(prefers-reduced-motion: reduce)");
     if (location.hash || motion.matches) return;
 
@@ -119,7 +129,7 @@
 <div class="ov" id="ov" hidden>
   <div class="ov__pic" aria-hidden="true"><img src="img/gl-02.webp" alt=""></div>
   <div class="ov__body">
-    <nav aria-label="Разделы сайта"><ul class="ov__list"><li><a href="index.html" data-img="img/gl-02.webp" aria-current="page">Главная · история дома</a></li><li><a href="menu.html" data-img="img/dish-ribeye.webp">Кухня и меню</a></li><li><a href="zaly.html" data-img="img/gl-08.webp">Залы</a></li><li><a href="konditerskaya.html" data-img="img/dessert-green.webp">Кондитерская</a></li><li><a href="afisha.html" data-img="img/gl-04.webp">Афиша</a></li><li><a href="bron.html" data-img="img/gl-11.webp">Бронь и контакты</a></li></ul></nav>
+    <nav aria-label="Разделы сайта"><ul class="ov__list"><li><a href="index.html" data-img="img/gl-02.webp" aria-current="page">Главная</a></li><li><a href="menu.html" data-img="img/dish-ribeye.webp">Кухня и меню</a></li><li><a href="bankety.html" data-img="img/conference-theatre.webp">Конференц-зал</a></li><li><a href="istoriya.html" data-img="img/archive-store.jpg">История здания</a></li><li><a href="konditerskaya.html" data-img="img/dessert-green.webp">Кондитерская</a></li><li><a href="afisha.html" data-img="img/gl-04.webp">Афиша</a></li><li><a href="bron.html" data-img="img/gl-11.webp">Бронь и контакты</a></li></ul></nav>
     <div class="ov__foot">
       <p class="live" data-live>Барнаул, Льва Толстого, 31 · ежедневно 11:00–24:00</p>
       <p><a href="tel:+79231614002">+7 923 161-40-02</a> · <a href="https://t.me/lurassa_rest">Telegram</a> · <a href="https://vk.com/lurassa_rest">ВКонтакте</a></p>
@@ -127,153 +137,26 @@
   </div>
 </div>
 <main id="main">
-<section class="heritage" aria-labelledby="heritage-title">
-    <div class="wrap heritage__grid">
-      <div class="heritage__copy">
-        <p class="heritage__address">Барнаул · Льва Толстого, 31</p>
-        <h1 id="heritage-title">Дом купца Сухова</h1>
-        <p>В этом доме на улице Льва Толстого Суховы торговали тканями и чаем, а в советское время барнаульцы ходили сюда в кино. Когда здание начали восстанавливать, под штукатуркой открылись кирпичные своды, а под полом нашли монеты XVIII века. Сегодня в бывшем купеческом магазине работает ресторан ЛЮРАССА.</p>
-        <div class="heritage__mission">
-          <p>Наша Миссия:</p>
-          <blockquote>«Сохранность Культурного НАСледия — Высшая ЦЕННОСТЬ Достижений Человечества».</blockquote>
-        </div>
-        <div class="heritage__links">
-          <a class="btn btn--ink" href="#story">Читать историю дома</a>
-        </div>
+<section class="h3" data-mood="evening" aria-label="Ресторан ЛЮРАССА">
+    <div class="h3__media" aria-hidden="true">
+      <div class="h3__set" data-for="morning"><img src="img/dessert-green.webp" alt=""><img src="img/gl-14.webp" alt=""><img src="img/dish-cake.webp" alt=""></div>
+      <div class="h3__set" data-for="day"><img src="img/gl-02.webp" alt=""><img src="img/gl-03.webp" alt=""><img src="img/gl-04.webp" alt=""></div>
+      <div class="h3__set" data-for="evening"><img class="is-on" src="img/gl-01.webp" alt=""><img src="img/gl-11.webp" alt=""><img src="img/gl-08.webp" alt=""></div>
+    </div>
+    <div class="h3__shade" aria-hidden="true"></div>
+    <div class="wrap h3__top">
+      <p class="live h3__live" data-live aria-live="polite">Барнаул · ежедневно 11:00–24:00</p>
+      <div class="moods" role="group" aria-label="Время суток"><button type="button" data-m="morning" aria-pressed="false">Утро</button><button type="button" data-m="day" aria-pressed="false">День</button><button type="button" data-m="evening" aria-pressed="true">Вечер</button></div>
+    </div>
+    <div class="wrap h3__mid">
+      <h1 class="h3__title"><span data-mood-text>Ужин у камина</span><small>ресторан русской кухни</small></h1>
+      <p class="h3__sub" data-mood-sub>Стейки из алтайской говядины, блюда из русской печи и музыка по афише. Двери открыты до полуночи.</p>
+      <div class="h3__cta" data-mood-cta>
+        <a class="btn btn--light" href="bron.html">Забронировать стол</a>
+        <a class="btn btn--line" href="afisha.html">Афиша вечера</a>
       </div>
-      <figure class="heritage__photo">
-        <img src="img/archive-store.jpg" alt="Старая барнаульская открытка с видом улицы Льва Толстого" width="1440" height="918" fetchpriority="high">
-        <figcaption>Улица Льва Толстого. Открытка из <a href="https://lurassa.ru/history">коллекции ресторана ЛЮРАССА</a></figcaption>
-      </figure>
     </div>
-    <div class="heritage__story" id="story">
-      <nav class="wrap heritage__contents" aria-label="Главы истории дома">
-        <a href="#restoration">Реставрация</a>
-        <a href="#sukhov">Суховы</a>
-        <a href="#store">Магазин</a>
-        <a href="#cinema">Кинотеатр</a>
-        <a href="#finds">Находки</a>
-        <a href="#opening">Открытие</a>
-        <a href="#mission">Миссия</a>
-      </nav>
-      <section class="heritage__chapter heritage__chapter--restoration" id="restoration">
-        <div class="wrap heritage__chapter-in">
-          <div class="heritage__chapter-copy">
-        <div>
-          <p class="heritage__period">С 2020 года</p>
-          <h2>Как началась реставрация</h2>
-        </div>
-        <div class="heritage__prose"><p>В августе 2020 года банк выставил на продажу соседний дом на Льва Толстого, 33. Лариса Харина, соучредитель ресторана ЛЮРАССА, вспоминает, что дом стоял полуразрушенным. Будущие владельцы решили его купить, хотя ещё не знали, что в нём откроют.</p>
-          <p>После покупки команда начала собирать сведения о прежних владельцах. К работе подключили историков, которые восстанавливали родословную Суховых. Из этой работы выросла идея ресторана, где можно узнать историю барнаульского купечества. Специалисты осмотрели жилой дом и решили, что места для ресторана там мало. Когда появилась возможность выкупить бывший магазин под номером 31, проект перенесли туда.</p>
-          <p>Труднее всего было восстановить просевший фундамент. Внутри раскрыли арочные проёмы и расчистили от старой штукатурки своды Монье. Это перекрытия из кирпича, уложенного дугами между металлическими балками. Сохранили форму окон, а подлинные дверные ручки, найденные в руинах, очистили, восстановили и вернули на двери.</p></div>
-          </div>
-          <figure class="heritage__figure">
-            <img src="img/facade-sign.webp" alt="Вход в восстановленный купеческий магазин" width="1030" height="1400" loading="lazy">
-            <figcaption>Толстого, 31. Вход в бывший магазин после реставрации.</figcaption>
-          </figure>
-        </div>
-      </section>
-      <section class="heritage__chapter heritage__chapter--portrait" id="sukhov">
-        <div class="wrap heritage__chapter-in">
-          <figure class="heritage__figure">
-            <img src="img/archive-sons.jpg" alt="Вывеска торгового дома Д. Н. Сухова сыновья на старой фотографии" width="1440" height="814" loading="lazy">
-            <figcaption>Торговый дом «Д. Н. Сухова сыновья» · <a href="https://lurassa.ru/history">Архивные снимки ресторана ЛЮРАССА</a></figcaption>
-          </figure>
-          <div class="heritage__chapter-copy">
-        <h2>Кем был Дмитрий Сухов</h2>
-        <div class="heritage__prose"><p>Дмитрий Никифорович Сухов вырос в семье купца первой гильдии Никифора Трофимовича Сухова. Семья вела торговлю по всему краю и владела кирпичным, кожевенным и свечным производствами. В 1880–1890-е годы, когда Дмитрий возглавил семейное дело, Суховы стали одними из крупнейших предпринимателей Барнаула.</p>
-          <p>В 1882 году Дмитрия Сухова избрали городским головой. Он направлял своё жалованье на нужды города и вкладывал личные средства в открытие гимназии и устройство нового кладбища. Его сын Василий тоже стал городским головой. В неурожайном 1902 году он выделил три тысячи рублей из собственных средств на зерно для нуждающихся горожан.</p></div>
-          </div>
-        </div>
-      </section>
-      <section class="heritage__chapter heritage__chapter--archive" id="store">
-        <div class="wrap heritage__chapter-in">
-        <div>
-          <p class="heritage__period">XIX век</p>
-          <h2>Магазин у Базарной площади</h2>
-        </div>
-          <div class="archive-album">
-            <figure id="album-street">
-              <img src="img/archive-store.jpg" alt="Большая Тобольская на старой открытке" width="1440" height="918" loading="lazy">
-              <figcaption><h3>На Большой Тобольской</h3><p>Так прежде называлась улица Льва Толстого. У Базарной площади усадьба Суховых занимала целый квартал. В доме под нынешним номером 31 семья торговала, а в соседнем, под номером 33, жила.</p></figcaption>
-            </figure>
-            <figure id="album-shop">
-              <img src="img/archive-extra.jpg" alt="Прилавки, полки с товаром и продавцы в торговом зале" width="1440" height="838" loading="lazy">
-              <figcaption><h3>За купеческим прилавком</h3><p>В магазин приходили за чаем, сахаром, тканями и готовым платьем. Здесь же купцы покупали у местных жителей сельскохозяйственную продукцию.</p></figcaption>
-            </figure>
-            <div class="album-controls" hidden aria-label="Снимки магазина">
-              <button type="button" aria-controls="album-street">На улице</button>
-              <button type="button" aria-controls="album-shop">Внутри магазина</button>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section class="heritage__chapter heritage__chapter--cinema" id="cinema">
-        <div class="wrap heritage__chapter-in">
-          <div class="heritage__date" aria-hidden="true">1938</div>
-          <div class="heritage__chapter-copy">
-        <div>
-          <p class="heritage__period">1917–1994</p>
-          <h2>От прилавка до киноэкрана</h2>
-        </div>
-        <div class="heritage__prose"><p>После революции здание национализировали. В разные годы здесь работали контора и магазин Центрального рабочего кооператива, оптовый магазин потребительских обществ, отделение милиции и торговая база. В 1938 году здесь открылся кинотеатр «Октябрь». В январе 1957 года в его зале впервые в Барнауле показали широкоэкранный фильм.</p>
-          <p>28 декабря 1994 года здание признали памятником культурного наследия регионального значения. В перечень памятников оно вошло как «Магазин Сухова».</p>
-            <p class="heritage__credit"><a href="https://altlib.ru/territorii/barnaul/kinoteatr-oktyabr/8988-2/">Алтайская краевая библиотека о кинотеатре</a></p></div>
-          </div>
-        </div>
-      </section>
-      <section class="heritage__chapter heritage__chapter--finds" id="finds">
-        <div class="wrap heritage__chapter-in">
-          <div class="heritage__date">
-            <span>1748</span>
-            <small>В этом году отчеканили медную денгу</small>
-          </div>
-          <div class="heritage__chapter-copy">
-        <h2>Что нашли под полом</h2>
-        <div class="heritage__prose"><p>Под старыми полами и слоями штукатурки нашли десятки монет, в том числе денгу 1748 года и сибирские монеты из колыванской меди. Рядом с ними обнаружили торговую пломбу, кафтанные застёжки, медный напёрсток и винные бутылки с клеймами барнаульских купцов.</p>
-          <p>Монеты проверили на подлинность. Сегодня они выставлены в музее ресторана. По этим находкам можно представить, чем люди торговали, как одевались и какими вещами пользовались в Барнауле до революции.</p>
-          </div>
-          </div>
-          <details class="finds-collection" id="nahodki">
-            <summary>Рассмотреть коллекцию находок</summary>
-            <ol class="tl">
-        <span class="tl__line" aria-hidden="true"><span class="tl__fill"></span></span>
-        <li class="tl__i"><span class="tl__dot" aria-hidden="true"></span><div class="tl__card"><span class="tl__y">1748</span><h3>Денга</h3><p>Медная монета времён Елизаветы Петровны. Самая старая находка в доме.</p></div></li>
-        <li class="tl__i"><span class="tl__dot" aria-hidden="true"></span><div class="tl__card"><span class="tl__y">1760-е</span><h3>Сибирская монета</h3><p>Её чеканили из колыванской меди, добытой на нынешнем Алтае, для обращения в Сибири.</p></div></li>
-        <li class="tl__i"><span class="tl__dot" aria-hidden="true"></span><div class="tl__card"><span class="tl__y">1786</span><h3>Полушка</h3><p>Самая мелкая монета империи, ровно половина деньги. </p></div></li>
-        <li class="tl__i"><span class="tl__dot" aria-hidden="true"></span><div class="tl__card"><span class="tl__y">XVIII–XIX</span><h3>Кафтанные застёжки и напёрсток</h3><p>Предметы из повседневной жизни купеческого дома.</p></div></li>
-        <li class="tl__i"><span class="tl__dot" aria-hidden="true"></span><div class="tl__card"><span class="tl__y">1841</span><h3>Копейка серебром</h3><p>Медная монета времён Николая I.</p></div></li>
-        <li class="tl__i"><span class="tl__dot" aria-hidden="true"></span><div class="tl__card"><span class="tl__y">1870–1900</span><h3>Печная дверца</h3><p>Чугунное литьё Кусинского завода: пожарное депо и птица Феникс. Печь в купеческом доме и грела, и украшала.</p></div></li>
-        <li class="tl__i"><span class="tl__dot" aria-hidden="true"></span><div class="tl__card"><span class="tl__y">XIX в.</span><h3>Торговая пломба</h3><p>Свинцовой пломбой купцы опечатывали товар, чтобы в дороге его никто не тронул.</p></div></li>
-        <li class="tl__i"><span class="tl__dot" aria-hidden="true"></span><div class="tl__card"><span class="tl__y">1916</span><h3>Две копейки</h3><p>Самая поздняя монета из найденных: её отчеканили за год до революции.</p></div></li>
-      </ol>
-          </details>
-        </div>
-      </section>
-      <section class="heritage__chapter heritage__chapter--opening" id="opening">
-        <div class="wrap heritage__chapter-in">
-          <figure class="heritage__figure">
-            <img src="img/opening-ribbon.webp" alt="На открытии ресторана ЛЮРАССА перерезают красную ленту" width="1280" height="873" loading="lazy">
-          </figure>
-          <div class="heritage__chapter-copy">
-            <p class="heritage__period">Август 2025 года</p>
-            <h2>Открытие ресторана ЛЮРАССА</h2>
-            <p class="heritage__prose">Юрий Схоменко перерезает ленту на открытии ресторана в бывшем магазине Суховых.</p>
-          </div>
-        </div>
-      </section>
-      <section class="heritage__chapter heritage__chapter--mission" id="mission">
-        <div class="wrap heritage__chapter-in">
-        <div>
-          <h2>Наша миссия</h2>
-          <p class="heritage__prose">Мы считаем сохранение культурного наследия одной из главных ценностей. В этом доме о прошлом рассказывают подлинные вещи и сама архитектура. Мы хотим, чтобы гости могли узнать историю Барнаула прямо здесь, в бывшем магазине Суховых.</p>
-        </div>
-        <figure class="heritage__plaque">
-          <img src="img/heritage-mission.jpg" alt="Табличка с миссией над дверью ресторана ЛЮРАССА" width="1280" height="960" loading="lazy">
-        </figure>
-        </div>
-      </section>
-    </div>
+    <div class="h3__word" aria-hidden="true">ЛЮРАССА</div>
   </section>
 
   <section class="ch" id="pech" aria-labelledby="kitchen-title">
@@ -322,12 +205,12 @@
       </span>
     </a>
     <div class="scene__hold" aria-hidden="true"></div>
-    <a class="scene" href="zaly.html#bankety">
-      <span class="scene__pic"><img src="img/g-banquet.webp" alt="" loading="lazy"></span>
+    <a class="scene" href="bankety.html">
+      <span class="scene__pic"><img src="img/conference-theatre.webp" alt="" loading="lazy"></span>
       <span class="wrap scene__in">
-        <span class="scene__t">Банкеты</span>
-        <span class="scene__s">Отдельный зал для торжества до 80 гостей.</span>
-        <span class="scene__go">О банкетах<svg aria-hidden="true"><use href="#i-arrow"/></svg></span>
+        <span class="scene__t">Конференц-зал</span>
+        <span class="scene__s">Зал на 50–80 человек для конференций, семинаров и деловых встреч.</span>
+        <span class="scene__go">Посмотреть зал и меню<svg aria-hidden="true"><use href="#i-arrow"/></svg></span>
       </span>
     </a>
     <div class="scene__hold" aria-hidden="true"></div>
@@ -360,7 +243,7 @@
 <footer class="foot">
   <div class="wrap foot__in">
     <img class="foot__wordmark" src="img/logo-cream.png" alt="ЛЮРАССА" width="400" height="357">
-    <nav class="foot__nav" aria-label="Разделы"><a href="menu.html">Кухня и меню</a><a href="zaly.html">Залы</a><a href="konditerskaya.html">Кондитерская</a><a href="afisha.html">Афиша</a><a href="bron.html">Бронь и контакты</a></nav>
+    <nav class="foot__nav" aria-label="Разделы"><a href="menu.html">Кухня и меню</a><a href="bankety.html">Конференц-зал</a><a href="istoriya.html">История здания</a><a href="konditerskaya.html">Кондитерская</a><a href="afisha.html">Афиша</a><a href="bron.html">Бронь и контакты</a></nav>
     <address class="foot__place">
       <svg class="foot__pin" viewBox="0 0 32 40" aria-hidden="true"><path d="M16 38S2 23.3 2 15.5a14 14 0 1 1 28 0C30 23.3 16 38 16 38Z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="16" cy="15" r="4.5" fill="none" stroke="currentColor" stroke-width="2"/></svg>
       <span class="foot__place-copy"><b>Ресторан ЛЮРАССА</b><span>Барнаул, Льва Толстого, 31</span><span>Ежедневно 11:00–24:00</span></span>
@@ -398,10 +281,10 @@
   </div>
 </div>
 
-<script src="menu-data.js?v=1795358185"></script>
-<script src="book.js?v=1795358185"></script>
-<script src="app.js?v=1795358185"></script>
-<script src="site.js?v=1795358185"></script>
-<script src="dish.js?v=1795358185"></script>
+<script src="menu-data.js?v=1795409646"></script>
+<script src="book.js?v=1795409646"></script>
+<script src="app.js?v=1795409646"></script>
+<script src="site.js?v=1795409646"></script>
+<script src="dish.js?v=1795409646"></script>
 </body>
 </html>

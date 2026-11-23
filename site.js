@@ -57,16 +57,73 @@
   }
   function paintLive() { document.querySelectorAll("[data-live]").forEach(function (el) { el.innerHTML = status(); }); }
   if (document.querySelector("[data-live]")) { paintLive(); setInterval(paintLive, 30000); }
+
+  const hero = document.querySelector(".h3[data-mood]");
+  if (!hero) return;
+
+  const moods = {
+    morning: {
+      title: "Завтрак в кондитерской",
+      description: "Кондитерская открывается в 08:00. Здесь готовят завтраки, пекут круассаны и подают кофе.",
+      links: [["konditerskaya.html", "В кондитерскую"], ["konditerskaya.html#hleb", "Хлеб к утру"]]
+    },
+    day: {
+      title: "Обед из русской печи",
+      description: "Борщ из томлёного гуся, пельмени из оленины и пироги из печи. Ресторан открывается в 11:00.",
+      links: [["bron.html", "Забронировать стол"], ["menu.html", "Меню"]]
+    },
+    evening: {
+      title: "Ужин у камина",
+      description: "Стейки из алтайской говядины, блюда из русской печи и музыка по афише. Двери открыты до полуночи.",
+      links: [["bron.html", "Забронировать стол"], ["afisha.html", "Афиша вечера"]]
+    }
+  };
+  const buttons = hero.querySelectorAll(".moods button");
+  const sets = hero.querySelectorAll(".h3__set");
+  const links = hero.querySelectorAll("[data-mood-cta] a");
+  const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  let timer;
+
+  function applyMood(name) {
+    const mood = moods[name];
+    clearInterval(timer);
+    hero.dataset.mood = name;
+    hero.querySelector("[data-mood-text]").textContent = mood.title;
+    hero.querySelector("[data-mood-sub]").textContent = mood.description;
+    links.forEach((link, index) => {
+      const [url, text] = mood.links[index];
+      link.href = url;
+      link.textContent = text;
+    });
+    buttons.forEach(button => button.setAttribute("aria-pressed", String(button.dataset.m === name)));
+    sets.forEach(set => set.classList.toggle("is-active", set.dataset.for === name));
+
+    const photos = hero.querySelector(".h3__set.is-active").querySelectorAll("img");
+    photos.forEach((photo, index) => photo.classList.toggle("is-on", index === 0));
+    if (motion.matches) return;
+    let index = 0;
+    timer = setInterval(() => {
+      if (document.hidden || motion.matches) return;
+      const previous = photos[index];
+      index = (index + 1) % photos.length;
+      photos[index].classList.add("is-on");
+      previous.classList.remove("is-on");
+    }, 6500);
+  }
+
+  buttons.forEach(button => button.addEventListener("click", () => applyMood(button.dataset.m)));
+  const hour = barnaulNow().h;
+  applyMood(hour >= 6 && hour < 11 ? "morning" : hour >= 11 && hour < 17 ? "day" : "evening");
 })();
 
-// Залы: колонки коллажа едут с разной скоростью, фото открывается на весь экран.
+// Галереи залов: фото открываются на весь экран, у коллажа есть параллакс.
 (function () {
   "use strict";
   var col = document.querySelector(".collage");
   if (!col) return;
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var cols = [].slice.call(col.querySelectorAll(".collage__col"));
-  if (!reduce && window.matchMedia("(min-width: 900px)").matches) {
+  if (cols.length && !reduce && window.matchMedia("(min-width: 900px)").matches) {
     var tick = false;
     var paint = function () {
       tick = false;

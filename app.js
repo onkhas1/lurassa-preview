@@ -21,14 +21,6 @@
     ["medium well", "Medium well", "63–69 °C"], ["well done", "Well done", "71–80 °C"]
   ];
 
-  // «Случился роман» — pairs from the restaurant's printed menu
-  var ROMANCE = {
-    "zakuski-12": { pair: "тёмный нефильтрованный стаут «Фляйсбах Драй Стаут»", note: "Огурец и мята освежают корюшку, а обжаренный вкус стаута ей подходит." },
-    "goryachee-6": { pair: "настойка «Брусника-крапива»", note: "Кислая брусника оттеняет утку, а крапива добавляет травяную ноту." },
-    "goryachee-16": { pair: "красное сухое вино «Адагум Эстейт» из Краснодарского края", note: "Вино подходит к насыщенному вкусу языка. Сливочное пюре и грюйер смягчают сочетание." },
-    "goryachee-1": { pair: "коктейль «Купеческая роскошь»", note: "Облепиха и маракуйя дают кислинку, игристое освежает, ром добавляет плотности." }
-  };
-
   // ---------- state ----------
   var KEY = "lurassa-cart", XKEY = "lurassa-extra";
   var cart = {}, extra = {};
@@ -65,7 +57,6 @@
     },
     open: function () { openDrawer(); },
     get: function (id) { return byId[id]; },
-    romance: function (id) { return ROMANCE[id]; },
     rub: rub
   };
 
@@ -143,12 +134,6 @@
     toastT = setTimeout(function () { toastEl.classList.remove("is-on"); }, 6500);
   }
 
-  function romance(id) {
-    var r = ROMANCE[id];
-    if (!r) return;
-    toast("Случился роман", "К блюду «" + esc(byId[id].name) + "» подойдёт " + esc(r.pair) + ". " + esc(r.note));
-  }
-
   // ---------- doneness picker ----------
   var picker = null;
   function pickDoneness(id, btn) {
@@ -187,7 +172,7 @@
     var id;
     if ((id = t.getAttribute("data-add")) && (t.classList.contains("add") || t.classList.contains("add-wide"))) {
       if (STEAKS[id]) { pickDoneness(id, t); return; }
-      stamp(t); setQty(id, (cart[id] || 0) + 1); romance(id);
+      stamp(t); setQty(id, (cart[id] || 0) + 1);
     } else if ((id = t.getAttribute("data-inc"))) { setQty(id, (cart[id] || 0) + 1); }
     else if ((id = t.getAttribute("data-dec"))) { setQty(id, (cart[id] || 0) - 1); }
     else if (t.hasAttribute("data-open-cart")) { e.preventDefault(); openDrawer(); }
@@ -239,7 +224,7 @@
           var id = c.id + "-" + i, d = byId[id];
           return '<div class="mitem' + (d.pic ? " mitem--pic" : "") + '">' +
             (d.pic ? '<button type="button" class="mitem__pic" data-dish="' + id + '" aria-label="Подробнее: ' + esc(d.name) + '"><img src="img/dish-' + d.pic + '.webp" alt="" loading="lazy" width="84" height="84"></button>' : "") +
-            '<div><button type="button" class="mitem__name dish-open" data-dish="' + id + '">' + esc(d.name) + (ROMANCE[id] ? ' <span class="tag">роман</span>' : "") + '</button><div class="mitem__w">' + d.w + (STEAKS[id] ? " · выберите прожарку" : "") + '</div></div>' +
+            '<div><button type="button" class="mitem__name dish-open" data-dish="' + id + '">' + esc(d.name) + '</button><div class="mitem__w">' + d.w + (STEAKS[id] ? " · выберите прожарку" : "") + '</div></div>' +
             '<div class="mitem__act"><span class="price">' + rub(d.price) + '</span><span data-slot>' + addHtml(id) + "</span></div></div>";
         }).join("") + "</div></section>";
     }).join("");

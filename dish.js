@@ -22,8 +22,7 @@
     box.querySelector(".dsh__cat").textContent = d.cat || "";
     box.querySelector(".dsh__t").textContent = d.name;
     box.querySelector(".dsh__meta").textContent = d.w ? "Вес " + d.w : "";
-    var r = window.LCart.romance(id), extra = "";
-    if (r) extra += '<div class="dsh__rom"><b>Случился роман</b><p>К этому блюду подойдёт ' + esc(r.pair) + ". " + esc(r.note) + "</p></div>";
+    var extra = "";
     if (id === "goryachee-3") extra += '<p class="dsh__note">Выберите прожарку стейка: от rare (51–55 °C) до well done (71–80 °C).</p>';
     extra += '<p class="dsh__note">Состав и аллергены уточните у официанта.</p>';
     box.querySelector(".dsh__extra").innerHTML = extra;
