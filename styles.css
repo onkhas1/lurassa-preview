@@ -218,19 +218,12 @@ p { margin: 0; max-width: 62ch; text-wrap: pretty; }
 /* ---------- booking ---------- */
 .book { display: grid; gap: 48px; }
 .book > *, .row2 > *, .field { min-width: 0; }
-.form { display: grid; gap: 16px; padding: 28px 22px; background: #fff; border: 1px solid var(--line); border-radius: 2px; }
-.form h3 { margin-bottom: 4px; }
-.form__fields { display: grid; gap: 14px; }
 .field { display: grid; gap: 6px; }
 .field label { font-size: 14px; font-weight: 600; color: var(--ink-2); }
 .field input, .field select { width: 100%; min-width: 0; font: inherit; font-size: 17px; color: var(--ink); background-color: var(--cream); min-height: 50px; padding: 10px 14px; border: 1px solid var(--sage-2); border-radius: 2px; }
 .field input:focus-visible, .field select:focus-visible { border-color: var(--olive); outline: 2px solid var(--brass); outline-offset: 1px; }
 .field input::placeholder { color: #66675b; }
 .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-.form__note { font-size: 14px; color: var(--ink-2); }
-.form__ok { display: none; padding: 18px; background: var(--sage); border-radius: 2px; }
-.form.is-sent .form__ok { display: block; }
-.form.is-sent .form__fields { display: none; }
 .contacts dl { margin: 28px 0 0; display: grid; gap: 22px; }
 .contacts dt { font-size: 14px; font-weight: 600; color: var(--ink-2); }
 .contacts dd { margin: 4px 0 0; font-family: var(--display); font-size: 21px; line-height: 1.45; }

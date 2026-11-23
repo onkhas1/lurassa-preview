@@ -1,5 +1,5 @@
 // Корзина ресторана ЛЮРАССА: блюда из меню + свои позиции (коробка конфет, сертификат, стейк с прожаркой),
-// подсказка «Случился роман», бронь-заглушка.
+// подсказка «Случился роман».
 (function () {
   "use strict";
 
@@ -206,28 +206,10 @@
     });
   }
 
-  // ---------- booking form (prototype) ----------
-  document.querySelectorAll("form[data-book]").forEach(function (f) {
-    var d = f.querySelector('input[type="date"]');
-    if (d) { var t = new Date(); d.min = t.toISOString().slice(0, 10); if (!d.value) d.value = d.min; }
-    f.addEventListener("submit", function (e) { e.preventDefault(); f.classList.add("is-sent"); f.querySelector(".form__ok").focus(); });
-  });
-
   // ---------- full menu page ----------
   var mroot = document.getElementById("menu-root");
   if (mroot) {
     var tabs = document.querySelector(".tabs__in");
-    tabs.innerHTML = window.MENU.map(function (c) { return '<a href="#' + c.id + '">' + c.title + "</a>"; }).join("");
-    mroot.innerHTML = window.MENU.map(function (c) {
-      return '<section class="mcat" id="' + c.id + '"><div class="mcat__head"><h2>' + c.title + "</h2>" + (c.note ? "<p>" + c.note + "</p>" : "") + '</div><div class="mitems">' +
-        c.items.map(function (it, i) {
-          var id = c.id + "-" + i, d = byId[id];
-          return '<div class="mitem' + (d.pic ? " mitem--pic" : "") + '">' +
-            (d.pic ? '<button type="button" class="mitem__pic" data-dish="' + id + '" aria-label="Подробнее: ' + esc(d.name) + '"><img src="img/dish-' + d.pic + '.webp" alt="" loading="lazy" width="84" height="84"></button>' : "") +
-            '<div><button type="button" class="mitem__name dish-open" data-dish="' + id + '">' + esc(d.name) + '</button><div class="mitem__w">' + d.w + (STEAKS[id] ? " · выберите прожарку" : "") + '</div></div>' +
-            '<div class="mitem__act"><span class="price">' + rub(d.price) + '</span><span data-slot>' + addHtml(id) + "</span></div></div>";
-        }).join("") + "</div></section>";
-    }).join("");
     var links = tabs.querySelectorAll("a");
     var io = new IntersectionObserver(function (ents) {
       ents.forEach(function (en) {

@@ -93,6 +93,7 @@
     links.forEach((link, index) => {
       const [url, text] = mood.links[index];
       link.href = url;
+      link.classList.toggle("restoplace-click-open", url === "bron.html");
       link.textContent = text;
     });
     buttons.forEach(button => button.setAttribute("aria-pressed", String(button.dataset.m === name)));
@@ -119,7 +120,7 @@
 // Галереи залов: фото открываются на весь экран, у коллажа есть параллакс.
 (function () {
   "use strict";
-  var col = document.querySelector(".collage");
+  var col = document.querySelector(".collage, .halls");
   if (!col) return;
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var cols = [].slice.call(col.querySelectorAll(".collage__col"));
@@ -139,8 +140,9 @@
   if (!lb) return;
   var img = lb.querySelector(".lb__img"), cnt = lb.querySelector(".lb__count"), at = 0, opener = null;
   var show = function (i) { at = (i + items.length) % items.length; var im = items[at].querySelector("img"); img.src = im.src; img.alt = im.alt; cnt.textContent = (at + 1) + " / " + items.length; };
+  var allItems = items;
   var close = function () { lb.hidden = true; document.body.style.overflow = ""; if (opener) opener.focus(); };
-  items.forEach(function (it, i) { it.addEventListener("click", function () { opener = it; show(i); lb.hidden = false; document.body.style.overflow = "hidden"; lb.querySelector(".lb__x").focus(); }); });
+  allItems.forEach(function (it) { it.addEventListener("click", function () { var group = it.closest(".hall-photos"); items = group ? Array.from(group.querySelectorAll("button")) : allItems; opener = it; show(items.indexOf(it)); lb.hidden = false; document.body.style.overflow = "hidden"; lb.querySelector(".lb__x").focus(); }); });
   lb.querySelector(".lb__x").addEventListener("click", close);
   lb.querySelector(".lb__prev").addEventListener("click", function () { show(at - 1); });
   lb.querySelector(".lb__next").addEventListener("click", function () { show(at + 1); });
@@ -194,4 +196,91 @@
   for (const button of buttons) button.addEventListener("click", () => show(button));
   show(buttons[0]);
   controls.hidden = false;
+})();
+
+(function () {
+  document.querySelectorAll('.checkout input[name="personal_consent"]').forEach(function (field) {
+    function validate() {
+      field.setCustomValidity(field.checked ? '' : 'Чтобы отправить заявку, отметьте согласие на обработку персональных данных.');
+    }
+    field.addEventListener('invalid', validate);
+    field.addEventListener('change', validate);
+  });
+
+  var key = 'lurassa.cookie-notice.v1';
+  try {
+    if (localStorage.getItem(key) === 'accepted') return;
+  } catch (error) { /* Storage can be unavailable in private browsing. */ }
+
+  var notice = document.createElement('aside');
+  notice.className = 'cookie-notice';
+  notice.setAttribute('aria-label', 'Использование cookies');
+  notice.innerHTML = '<p>Мы используем cookies и Яндекс.Метрику, чтобы сайт работал удобнее. Подробнее — в <a href="privacy.html">политике конфиденциальности</a>.</p><button class="btn btn--sm" type="button">Хорошо</button>';
+  document.body.appendChild(notice);
+  notice.querySelector('button').addEventListener('click', function () {
+    try { localStorage.setItem(key, 'accepted'); } catch (error) { /* Dismiss for this visit. */ }
+    notice.remove();
+    document.dispatchEvent(new Event('lurassa:cookies-accepted'));
+  });
+})();
+
+(function () {
+  const tour = document.querySelector('[data-tour-url]');
+  if (!tour || !tour.dataset.tourUrl) return;
+  try {
+    const url = new URL(tour.dataset.tourUrl);
+    if (url.protocol === 'https:') {
+      const link = tour.querySelector('a');
+      link.href = url.href;
+      if (url.origin !== location.origin) {
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+      }
+      tour.hidden = false;
+    }
+  } catch { /* Keep the section hidden until the address is valid. */ }
+})();
+
+(function () {
+  const view = document.querySelector('[data-widget-url]');
+  if (!view || !('IntersectionObserver' in window)) return;
+  let url;
+  try { url = new URL(view.dataset.widgetUrl); } catch { return; }
+  if (url.origin !== 'https://platform.2gis.ru' || url.pathname !== '/api/map-constructor/widget') return;
+
+  let accepted = false;
+  try { accepted = localStorage.getItem('lurassa.cookie-notice.v1') === 'accepted'; } catch { /* Use the in-page choice. */ }
+  let visible = false;
+  const observer = new IntersectionObserver(entries => {
+    visible = entries[entries.length - 1].isIntersecting;
+    loadWhenReady();
+  });
+  observer.observe(view);
+  document.addEventListener('lurassa:cookies-accepted', () => {
+    accepted = true;
+    loadWhenReady();
+  }, { once: true });
+
+  function loadWhenReady() {
+    if (!accepted || !visible || view.querySelector('iframe')) return;
+    observer.disconnect();
+    const frame = document.createElement('iframe');
+    const toggle = view.querySelector('button');
+    frame.title = 'Ресторан ЛЮРАССА на карте 2ГИС';
+    frame.loading = 'lazy';
+    frame.tabIndex = -1;
+    frame.src = url.href;
+    frame.addEventListener('load', () => {
+      view.classList.add('is-loaded');
+      toggle.hidden = false;
+    }, { once: true });
+    toggle.addEventListener('click', () => {
+      const active = view.classList.toggle('is-interactive');
+      frame.tabIndex = active ? 0 : -1;
+      toggle.setAttribute('aria-pressed', String(active));
+      toggle.textContent = active ? 'Вернуть прокрутку страницы' : 'Нажмите, чтобы взаимодействовать с картой';
+      if (active) frame.focus();
+    });
+    view.appendChild(frame);
+  }
 })();

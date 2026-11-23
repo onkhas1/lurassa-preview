@@ -17,7 +17,7 @@
     var d = window.LCart.get(id); if (!d) return;
     opener = from || null;
     var pic = box.querySelector(".dsh__pic");
-    pic.innerHTML = d.pic ? '<img src="img/dish-' + d.pic + '.webp" alt="' + esc(d.name) + '">' : '<span class="dsh__noimg" aria-hidden="true"></span>';
+    pic.innerHTML = d.pic ? '<img src="img/dish-' + d.pic + '.webp" width="800" height="600" loading="lazy" alt="' + esc(d.name) + '">' : '<span class="dsh__noimg" aria-hidden="true"></span>';
     box.classList.toggle("dsh--noimg", !d.pic);
     box.querySelector(".dsh__cat").textContent = d.cat || "";
     box.querySelector(".dsh__t").textContent = d.name;
