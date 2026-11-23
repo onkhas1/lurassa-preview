@@ -53,6 +53,7 @@
     addCustom: function (key, info) {
       byId[key] = { id: key, name: info.name, w: info.w || "", price: info.price, custom: true };
       setQty(key, (cart[key] || 0) + 1);
+      toast("Добавлено в корзину", esc(info.name));
     },
     open: function () { openDrawer(); },
     get: function (id) { return byId[id]; },
@@ -117,6 +118,19 @@
     drawer.querySelectorAll(".to-checkout, .checkout button[type=submit]").forEach(function (b) { b.disabled = !ids.length; });
   }
 
+  var toastEl = null, toastT = 0;
+  function toast(title, html) {
+    if (!toastEl) {
+      toastEl = document.createElement("div");
+      toastEl.className = "toast"; toastEl.setAttribute("role", "status"); toastEl.setAttribute("aria-live", "polite");
+      document.body.appendChild(toastEl);
+    }
+    toastEl.innerHTML = "<b>" + title + "</b><p>" + html + "</p>";
+    toastEl.classList.add("is-on");
+    clearTimeout(toastT);
+    toastT = setTimeout(function () { toastEl.classList.remove("is-on"); }, 900);
+  }
+
   // ---------- doneness picker ----------
   var picker = null;
   function pickDoneness(id, btn) {
@@ -140,6 +154,7 @@
         byId[key] = { id: key, name: base.name + " · " + d[1], w: base.w, price: base.price, custom: true };
         setQty(key, (cart[key] || 0) + 1);
         closePick();
+        toast("Добавлено в корзину", esc(byId[key].name));
       });
     });
     picker.hidden = false; picker._opener = btn;
@@ -155,6 +170,7 @@
     if ((id = t.getAttribute("data-add")) && (t.classList.contains("add") || t.classList.contains("add-wide"))) {
       if (STEAKS[id]) { pickDoneness(id, t); return; }
       setQty(id, (cart[id] || 0) + 1);
+      toast("Добавлено в корзину", esc(byId[id].name));
     } else if ((id = t.getAttribute("data-inc"))) { setQty(id, (cart[id] || 0) + 1); }
     else if ((id = t.getAttribute("data-dec"))) { setQty(id, (cart[id] || 0) - 1); }
     else if (t.hasAttribute("data-open-cart")) { e.preventDefault(); openDrawer(); }
