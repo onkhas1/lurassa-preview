@@ -865,3 +865,21 @@ button.mitem__pic { padding: 0; border: 0; background: none; cursor: zoom-in; }
   .conference-gallery__track .gal__item img { transition: none; }
   .conference-gallery__track .gal__item:hover img { transform: none; }
 }
+
+@media (max-width: 640px) {
+  .pager__in { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .pager__a { min-width: 0; gap: 6px; }
+  .pager__a span { min-width: 0; overflow-wrap: anywhere; }
+  .pager__a svg { width: 18px; }
+  .mitems { grid-template-columns: minmax(0, 1fr); }
+  .mitem, .mitem--pic { grid-template-columns: minmax(0, 1fr) auto; }
+  .mitem--pic { grid-template-columns: 64px minmax(0, 1fr) auto; }
+  .mitem__pic { width: 64px; height: 64px; }
+  .mitem { column-gap: 10px; }
+  .mitem__name { overflow-wrap: anywhere; }
+}
+@media (max-width: 420px) {
+  .mitem--pic { grid-template-columns: 64px minmax(0, 1fr); }
+  .mitem--pic .mitem__pic { grid-row: 1 / 3; }
+  .mitem--pic .mitem__act { grid-column: 2; justify-content: space-between; }
+}
